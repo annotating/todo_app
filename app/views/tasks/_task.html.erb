@@ -1,0 +1,13 @@
+<% if task.id.present? %>
+	<li id="task-<%= task.id %>">
+	  <span class="content">
+	    <%= task.note %>
+	    <%= task.completed_at %>
+	  </span>
+	  <span class="timestamp">
+	    <% if task.user == current_user %>
+	      <%= link_to "delete", task, method: :delete %>
+	    <% end %>
+	  </span>
+	</li>
+<% end %>

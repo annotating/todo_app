@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign Up!</title>
+	</head>
+	<body>
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+
+		<p><a href="/about">About</a><p>
+		<p><a href="/users">Users</a><p>
+		<p><a href="/calendar">Calendar</a><p>
+
+		<%= yield %>
+
+		<% if user_signed_in? %>
+			<p>Welcome <%= current_user.email %></p>
+			<p>
+				<%= current_user.tasks.count %> Tasks
+			</p>
+			<section class="task_list">
+				<% if @task_items.any? %>
+					<ol class="task">
+					<%= render @task_items %>
+					</ol>
+				<% end %>
+			</section>
+			<section class="task_form">
+				<%= render 'tasks/form' %>
+			</section>
+
+			<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+		<% else %>
+			<p>You are not signed in.</p>
+			<%= link_to 'Login', new_user_session_path %>
+		<% end %>
+	</body>
+</html>
