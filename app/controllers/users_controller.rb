@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-	before_filter :verify_login, :except => [:about]
-	
+	before_filter :verify_login
+
 	def show
 	    @user = User.find(params[:id])
 	end

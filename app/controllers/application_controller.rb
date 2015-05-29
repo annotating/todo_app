@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   	def verify_login
 	    unless user_signed_in?
-	      render :template => 'pages/home'
+	      redirect_to root_url
 	    end
   	end
 end

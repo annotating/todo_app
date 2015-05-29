@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  before_filter :verify_login, :except => [:about]
+  before_filter :verify_login, :except => [:home, :about]
 
   def home
   	if user_signed_in?
