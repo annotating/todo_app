@@ -1,13 +1,14 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+laundry:
+  note: "do laundry"
+  created_at: <%= 2.hours.ago %>
+  user: trevor
 
-one:
-  user_id: 
-  note: MyText
-  created_at: 2015-05-28
-  completed_at: 2015-05-28
+most_recent:
+  note: "new task"
+  created_at: <%= Time.zone.now %>
+  user: trevor
 
-two:
-  user_id: 
-  note: MyText
-  created_at: 2015-05-28
-  completed_at: 2015-05-28
+jill_groceries:
+  note: "buy squash"
+  created_at: <%= 1.hours.ago %>
+  user: jill
