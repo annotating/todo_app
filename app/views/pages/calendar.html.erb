@@ -23,6 +23,7 @@
 					<tr>
 						<td><%= task.note %></td>
 						<td><%= task.completed_at %></td>
+						<td><a><%= link_to "view", 'tasks/'+task.created_at.strftime('%Y/%m/%d') %></a></td>
 					</tr>
 				<% end %>
 			</section>

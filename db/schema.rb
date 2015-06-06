@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528231122) do
+ActiveRecord::Schema.define(version: 20150603234750) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "note"
     t.datetime "created_at",   null: false
-    t.date     "completed_at"
+    t.datetime "completed_at"
     t.datetime "updated_at",   null: false
   end
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150528231122) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.text     "blurb"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

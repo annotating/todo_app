@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   end
 
   def calendar
-	@task_items = current_user.tasks
+     @task_items = current_user.tasks
   end
 
 end

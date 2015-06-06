@@ -13,6 +13,27 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+    if @task.present? 
+      if @task.update_attributes(task_params)
+        flash[:success] = "Task updated"
+        redirect_to root_url
+      else
+        @task_items = []
+        render 'pages/home'
+      end
+    end
+  end
+
+  def show
+    @task_date = DateTime.new(params[:year].to_f, params[:month].to_f, params[:day].to_f)
+    @tasks_from_date = Task.where({
+      user_id: current_user.id,
+      created_at: @task_date.beginning_of_day..@task_date.end_of_day
+    })
+  end
+
   def destroy
      @task = Task.find(params[:id])
     if @task.present?

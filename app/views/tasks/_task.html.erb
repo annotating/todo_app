@@ -6,6 +6,15 @@
 	  </span>
 	  <span class="timestamp">
 	    <% if task.user == current_user %>
+			<%= form_for(task, html: { multipart: true }) do |f| %>
+			  <%= render 'shared/error_messages', object: f.object %>
+			  <div class="field">
+			  	<%= f.check_box 'completed_at', (task.completed_at.present? ? 
+			  		{:checked => 'checked'} : {:checked => false}), 
+		  		Time.zone.now %>
+			  </div>
+			  <%= f.submit "Update", class: "btn btn-primary" %>
+			<% end %>	      
 	      <%= link_to "delete", task, method: :delete %>
 	    <% end %>
 	  </span>
