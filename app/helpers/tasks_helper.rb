@@ -12,17 +12,25 @@ def tasks_completed(user)
 	tasks_completed_by_date = {}
 
 	tasks_entered = Task.where(user: user.id)
-								.select("COUNT(DATE(created_at)) as num_created, DATE(created_at) as date")
-								.group("DATE(created_at)") 
-	tasks_entered.each do |task|
-		tasks_entered_by_date[task.date] = task.num_created
+								.select("DATE(created_at) as date")
+								.group(:created_at)
+	# couldn't get postgre query to work...
+	# so we will do this the ultra pleb way
+	tasks_entered.each do |t| 
+		if (tasks_entered_by_date[t.date].blank?)
+			tasks_entered_by_date[t.date] = 0;
+		end;
+		tasks_entered_by_date[t.date] += 1;
 	end
 
 	tasks_completed= Task.where(user: user.id)
-								.select("COUNT(DATE(completed_at)) as num_completed, DATE(completed_at) as date")
-								.group("DATE(completed_at)") 
-	tasks_completed.each do |task|
-		tasks_completed_by_date[task.date] = task.num_completed
+								.select("DATE(completed_at) as date")
+								.group(:completed_at) 
+	tasks_completed.each do |t|
+		if (tasks_completed_by_date[t.date].blank?)
+			tasks_completed_by_date[t.date] = 0;
+		end;
+		tasks_completed_by_date[t.date] += 1;
 	end
 
 	if (!tasks_entered_by_date.blank?)
