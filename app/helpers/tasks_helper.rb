@@ -2,7 +2,7 @@ module TasksHelper
 
 def tasks_completed(user)
 	@tasks_completed = {};
-	today =  Date.today.to_formatted_s(:db)
+	today =  DateTime.now.utc.in_time_zone('America/Los_Angeles').to_date
 
 	num_days_entered = 0
 	num_days_completed = 0
@@ -11,22 +11,27 @@ def tasks_completed(user)
 	tasks_entered_by_date = {}
 	tasks_completed_by_date = {}
 
-	tasks_entered = Task.where(user: user.id).select("DATE(created_at) as date")
 	# couldn't get postgre query to work...
 	# so we will do this the ultra pleb way
+
+	tasks_entered = Task.where(user: user.id).select("DATE(created_at) as date_created, DATE(completed_at) as date_completed")
+
 	tasks_entered.each do |t| 
-		if (tasks_entered_by_date[t.date].blank?)
-			tasks_entered_by_date[t.date] = 0;
+		tzdate_created = t.date_created.in_time_zone('America/Los_Angeles').to_date
+		if (tasks_entered_by_date[tzdate_created].blank?)
+			tasks_entered_by_date[tzdate_created] = 0;
 		end;
-		tasks_entered_by_date[t.date] += 1;
+		tasks_entered_by_date[tzdate_created] += 1;
 	end
 
-	tasks_completed= Task.where(user: user.id).select("DATE(completed_at) as date")
-	tasks_completed.each do |t|
-		if (tasks_completed_by_date[t.date].blank?)
-			tasks_completed_by_date[t.date] = 0;
-		end;
-		tasks_completed_by_date[t.date] += 1;
+	tasks_entered.each do |t| 
+		if (t.date_completed.present?)
+			tzdate_completed = t.date_completed.in_time_zone('America/Los_Angeles').to_date
+			if (tasks_completed_by_date[tzdate_completed].blank?)
+				tasks_completed_by_date[tzdate_completed] = 0;
+			end;
+			tasks_completed_by_date[tzdate_completed] += 1;
+		end
 	end
 
 	if (!tasks_entered_by_date.blank?)
