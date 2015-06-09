@@ -11,9 +11,7 @@ def tasks_completed(user)
 	tasks_entered_by_date = {}
 	tasks_completed_by_date = {}
 
-	tasks_entered = Task.where(user: user.id)
-								.select("DATE(created_at) as date")
-								.group(:created_at)
+	tasks_entered = Task.where(user: user.id).select("DATE(created_at) as date")
 	# couldn't get postgre query to work...
 	# so we will do this the ultra pleb way
 	tasks_entered.each do |t| 
@@ -23,9 +21,7 @@ def tasks_completed(user)
 		tasks_entered_by_date[t.date] += 1;
 	end
 
-	tasks_completed= Task.where(user: user.id)
-								.select("DATE(completed_at) as date")
-								.group(:completed_at) 
+	tasks_completed= Task.where(user: user.id).select("DATE(completed_at) as date")
 	tasks_completed.each do |t|
 		if (tasks_completed_by_date[t.date].blank?)
 			tasks_completed_by_date[t.date] = 0;
