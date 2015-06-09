@@ -1,35 +1,23 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Sign Up!</title>
-	</head>
-	<body>
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
+<% provide(:title, "Calendar") %>
 
-		<p><a href="/about">About</a><p>
-		<p><a href="/users">Users</a><p>
-		<p><a href="/calendar">Calendar</a><p>
+<h1>Calendar</h1>
+<p>
+	<%= tasks_completed(current_user)[:days_count] %> Days Completed
+</p>
+<section class="task_list">
+	<% date_statuses = tasks_completed(current_user)[:date_statuses] %> 
+	<% date_statuses.each do |date, status| %>
+		<% datef = date.dup
+		   datef.gsub! '-', '/'%></td>
+		<tr>
+			<td><%= datef %></td>
+			<% if (status) %>
+				<td>G</td>
+			<% else %>
+				<td>R</td>
+			<% end %>
+			<td><a><%= link_to "View", 'tasks/'+datef %></a></td>
+		</tr>
+	<% end %>
+</section>
 
-		<%= yield %>
-
-		<% if user_signed_in? %>
-			<p>Welcome <%= current_user.email %></p>
-			<p>
-				<%= current_user.tasks.count %> Tasks
-			</p>
-			<section class="task_list">
-				<% @task_items.each do |task| %>
-					<tr>
-						<td><%= task.note %></td>
-						<td><%= task.completed_at %></td>
-						<td><a><%= link_to "view", 'tasks/'+task.created_at.strftime('%Y/%m/%d') %></a></td>
-					</tr>
-				<% end %>
-			</section>
-		<% else %>
-			<p>You are not signed in.</p>
-			<%= link_to 'Login', new_user_session_path %>
-		<% end %>
-	</body>
-</html>

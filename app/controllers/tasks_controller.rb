@@ -42,7 +42,7 @@ class TasksController < ApplicationController
     flash[:success] = "Task deleted!"
     redirect_to root_url
   end
-
+  
     private
 
     def task_params
