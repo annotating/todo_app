@@ -8,12 +8,6 @@
 
 <section class="task_list">
 	<% date_statuses = tasks_completed(current_user)[:date_statuses] %> 
-
-<%= date_statuses %>
-<br>
-<%=  DateTime.now.to_date %>
-<br>!!!
-
 	<% date_statuses.each do |date, status| %>
 		<% datef = date.to_s.dup
 		   datef.gsub! '-', '/'%></td>
