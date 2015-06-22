@@ -7,9 +7,34 @@
  */
 
 .icon-block {
-  padding: 0 15px;
+  	padding: 0 15px;
 }
 
 p {
 	word-wrap: break-word;
+}
+
+.page {
+	height: 100vh;
+}
+
+td {
+	padding: 10px;
+}
+
+.taskform {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.brand-logo {
+	left: 10px;
+}
+
+.textlabel {
+	color: black;
+}
+
+.h5, .textlabel {
+	font-size: 1.6em;
 }

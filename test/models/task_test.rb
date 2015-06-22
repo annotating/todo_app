@@ -20,8 +20,4 @@ class TaskTest < ActiveSupport::TestCase
     assert_not @task.valid?
   end
 
-  test "order should be most recent first" do
-    assert_equal tasks(:most_recent), Task.first
-  end
-
 end

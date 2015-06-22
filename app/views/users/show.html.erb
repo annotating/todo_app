@@ -1,11 +1,20 @@
 <% provide(:title, "User Profile") %>
 <h1>Profile</h1> 
 
-<p><%= @user.alias %></p>
+<div class="section">
+	<h5>Alias</h5>
+	<p><%= @user.alias %></p>
+</div>
+<div class="divider"></div>
 
-<h5>About</h5>
-<p><%= @user.blurb %></p>
+<div class="section">
+	<h5>About Me</h5>
+	<p><%= @user.blurb %></p>
+</div>
+
+<div class="divider"></div>
+<div class="section"></div>
 
 <% if current_user == @user %>
-	<%= link_to "Update My Profile", edit_user_path %>
+	<%= link_to "Update My Profile", edit_user_path, class:"btn" %>
 <% end %>

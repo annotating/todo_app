@@ -1,8 +1,8 @@
 <%= form_for(@task, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="input-field">
-    <%= label_tag 'task[note]', 'Create new task...' %>
-    <%= text_field_tag 'task[note]' %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+    <%= label_tag 'task[note]', 'Add new task...' %>
+    <%= text_field_tag 'task[note]', nil, length:100 %>
+  </div> 
+  <%= f.submit "Add Task", class: "btn" %>
 <% end %>

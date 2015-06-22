@@ -1,25 +1,21 @@
 <% if task.id.present? %>
-	<li id="task-<%= task.id %>">
-	  <span class="content">
-	    <%= task.note %>
-	    <%= task.completed_at %>
-	  </span>
-	  <span class="timestamp">
-	    <% if task.user == current_user %>
-			<%= form_for(task, html: { multipart: true }) do |f| %>
-			  <%= render 'shared/error_messages', object: f.object %>
-			 <div>
-				<%= hidden_field_tag 'task[completed_at]', nil %>
-				<%= check_box_tag 'task[completed_at]', 
-						Time.zone.now,
-						(task.completed_at.present? ? true : false),
-						{id:'task_id_'+task.id.to_s } %>
-				<%= label_tag 'task_id_'+task.id.to_s, 'Done' %>
-			  </div>
-			  <%= f.submit "Update", class: "btn btn-primary" %>
-			<% end %>	      
-	      <%= link_to "delete", task, method: :delete %>
-	    <% end %>
-	  </span>
-	</li>
+    <% if task.user == current_user %>
+    		<%= form_for(task, html: { multipart: true }) do |f| %>
+		 	<%= render 'shared/error_messages', object: f.object %>		
+			 	<tr > 
+			 	  	<td><%= task.note %></td>
+					<td>
+						<%= hidden_field_tag 'task[completed_at]', nil %>
+						<%= check_box_tag 'task[completed_at]', 
+							Time.zone.now,
+							(task.completed_at.present? ? true : false),
+							{id:'task_id_'+task.id.to_s, :onchange => 'this.form.submit();'} %>
+						<%= label_tag 'task_id_'+task.id.to_s, 'Done' %>
+					</td>
+					<td>
+						<%= link_to "Remove", task, method: :delete %>
+					</td>   
+				</tr>
+		<% end %>	   	      
+    <% end %>
 <% end %>

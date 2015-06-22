@@ -1,7 +1,8 @@
-<li id="user-<%= user.id %>">
-  <span class="user"><%= link_to user.alias, user %></span>
-  <span class="ut count">
-	<%= tasks_completed(user)[:days_count] %>
-  </span>
-</li>
+<tr id="user-<%= user.id %>">
+  <td><%= link_to user.alias, user %></td>
+  <td><%= tasks_completed(user)[:days_count] %></td>
+  <td></td>
+  <td></td>
+
+</tr>
 

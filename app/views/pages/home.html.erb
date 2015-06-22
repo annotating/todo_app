@@ -1,17 +1,21 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
-	<p><b>Welcome back, <%= current_user.email %>!</b></p>
-	<p>
-		<%= @task_items.count %> Tasks Today
-	</p>
-	<section class="task_form">
+	<h1>Today's Tasks</h1>
+	<p><%= @task_items.count %> Tasks Pending Today</p>
+
+	<div class="taskform section amber lighten-4">
 		<%= render 'tasks/form' %>
-	</section>
-	<section class="task_list">
+	</div>
+
+	<br>
+	
+	<div class="section amber lighten-4">
 		<% if @task_items.any? %>
-			<ol class="task">
-			<%= render @task_items %>
-			</ol>
+			<table class="hoverable">
+				<tbody>
+					<%= render @task_items %>
+				</tbody>
+			</table>
 		<% end %>
-	</section>
+	</div>
 <% end %>

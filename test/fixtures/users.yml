@@ -1,7 +1,9 @@
 trevor:
   email: trevor@test.com
+  alias: trevor
   encrypted_password:  <%= Devise::Encryptor.digest(User, 'fakebeef') %>
 
 jill:
   email: jill@test.com
+  alias: jill
   encrypted_password:  <%= Devise::Encryptor.digest(User, 'realbeef') %>

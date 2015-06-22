@@ -1,17 +1,17 @@
 <header>
-  <div class="container">
     <nav>
       <div class="nav-wrapper">
+        <span class="brand-logo">To Do List</span>
         <ul class="right hide-on-med-and-down">
-          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "Home", root_path %></li>
           <% if user_signed_in? %>
             <li><%= link_to "Users", users_path %></li>
               <li><a class="dropdown-button" href="#" data-activates="dropoptions" data-beloworigin="true" hover="true">
                 Account
               </a> </li>
               <ul id="dropoptions" class='dropdown-content'>
-                <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Profile", edit_user_path(current_user) %></li>
                 <li><%= link_to "Calendar", calendar_path %></li>
                 <li class="divider"></li>
                 <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
@@ -22,7 +22,6 @@
         </ul>
       </div>
     </nav>
-  </div>
 </header>
 <script>
 $(document).ready(function(){

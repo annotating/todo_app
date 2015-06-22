@@ -5966,12 +5966,10 @@ Picker.extend( 'pickadate', DatePicker )
 
   $.fn.characterCounter = function(){
     return this.each(function(){
-
       itHasLengthAttribute = $(this).attr('length') != undefined;
 
       if(itHasLengthAttribute){
         $(this).on('input', updateCounter);
-        $(this).on('focus', updateCounter);
         $(this).on('blur', removeCounterElement);
 
         addCounterElement($(this));

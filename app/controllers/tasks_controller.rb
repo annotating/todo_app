@@ -5,24 +5,22 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      flash[:success] = "Task created!"
-      redirect_to root_url
     else
       @task_items = []
-      render 'pages/home'
+      flash[:error] = @task.errors.empty? ? "" : @task.errors.full_messages.to_sentence
     end
+    redirect_to root_url
   end
 
   def update
     @task = Task.find(params[:id])
     if @task.present? 
       if @task.update_attributes(task_params)
-        flash[:success] = "Task updated"
-        redirect_to root_url
       else
         @task_items = []
-        render 'pages/home'
+        flash[:error] = @task.errors.empty? ? "" : @task.errors.full_messages.to_sentence
       end
+      redirect_to root_url
     end
   end
 
@@ -39,7 +37,6 @@ class TasksController < ApplicationController
     if @task.present?
       @task.destroy
   	end
-    flash[:success] = "Task deleted!"
     redirect_to root_url
   end
   
