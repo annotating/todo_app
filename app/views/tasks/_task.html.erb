@@ -8,10 +8,13 @@
 	    <% if task.user == current_user %>
 			<%= form_for(task, html: { multipart: true }) do |f| %>
 			  <%= render 'shared/error_messages', object: f.object %>
-			  <div class="field">
-			  	<%= f.check_box 'completed_at', (task.completed_at.present? ? 
-			  		{:checked => 'checked'} : {:checked => false}), 
-		  		Time.zone.now %>
+			 <div>
+				<%= hidden_field_tag 'task[completed_at]', nil %>
+				<%= check_box_tag 'task[completed_at]', 
+						Time.zone.now,
+						(task.completed_at.present? ? true : false),
+						{id:'task_id_'+task.id.to_s } %>
+				<%= label_tag 'task_id_'+task.id.to_s, 'Done' %>
 			  </div>
 			  <%= f.submit "Update", class: "btn btn-primary" %>
 			<% end %>	      

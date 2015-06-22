@@ -1,16 +1,20 @@
 <% provide(:title, "My Profile") %>
 <h1>Update Profile</h1>
-
-<div class="row">
-	<div class="form">
-		<%= form_for(@user) do |f| %>
-			<%= render 'shared/error_messages', object: f.object %>
-
-			<%= f.label :about_me, 'About Me' %> (1000 characters max)
-			<%= f.text_area :blurb, class: 'form-control' %>
-
-			<%= f.submit "Save changes", class: "btn btn-primary" %>
-		<% end %>
-
-	</div>
+<div class="form">
+	<%= form_for(@user) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+	
+			<div class="input-field">
+				<%= f.label :alias, 'Alias', class: "active" %>
+				<%= f.text_field :alias, class: 'form-control' %>
+			</div>
+	
+		
+			<div class="input-field">
+				<%= f.label :about_me, 'About Me (1000 characters max)', class: "active" %> 
+				<%= f.text_area :blurb, class: 'materialize-textarea form-control ' %>
+			</div>
+	
+		<%= f.submit "Save changes", class: "btn btn-primary" %>
+	<% end %>
 </div>

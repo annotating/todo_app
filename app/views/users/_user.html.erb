@@ -1,5 +1,5 @@
 <li id="user-<%= user.id %>">
-  <span class="user"><%= link_to user.email, user %></span>
+  <span class="user"><%= link_to user.alias, user %></span>
   <span class="ut count">
 	<%= tasks_completed(user)[:days_count] %>
   </span>

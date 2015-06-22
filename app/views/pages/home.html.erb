@@ -1,6 +1,6 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
-	<p>Welcome <%= current_user.email %></p>
+	<p><b>Welcome back, <%= current_user.email %>!</b></p>
 	<p>
 		<%= @task_items.count %> Tasks Today
 	</p>

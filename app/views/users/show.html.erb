@@ -1,7 +1,11 @@
 <% provide(:title, "User Profile") %>
-<h1>Profile</h1>
-<p><%= @user.email %></p>
+<h1>Profile</h1> 
+
+<p><%= @user.alias %></p>
+
+<h5>About</h5>
 <p><%= @user.blurb %></p>
+
 <% if current_user == @user %>
 	<%= link_to "Update My Profile", edit_user_path %>
 <% end %>
