@@ -2,7 +2,7 @@ module TasksHelper
 
 def tasks_completed(user)
 	@tasks_completed = {};
-	today =  DateTime.now.utc.in_time_zone('America/Los_Angeles').to_date
+	today =  DateTime.now.utc.in_time_zone('Pacific Time (US & Canada)').to_date
 
 	num_days_entered = 0
 	num_days_completed = 0
@@ -17,7 +17,7 @@ def tasks_completed(user)
 	tasks_entered = Task.where(user: user.id).select("DATE(created_at) as date_created, DATE(completed_at) as date_completed")
 
 	tasks_entered.each do |t| 
-		tzdate_created = t.date_created.in_time_zone('America/Los_Angeles').to_date
+		tzdate_created = t.date_created.to_date
 		if (tasks_entered_by_date[tzdate_created].blank?)
 			tasks_entered_by_date[tzdate_created] = 0;
 		end;
@@ -26,7 +26,7 @@ def tasks_completed(user)
 
 	tasks_entered.each do |t| 
 		if (t.date_completed.present?)
-			tzdate_completed = t.date_completed.in_time_zone('America/Los_Angeles').to_date
+			tzdate_completed = t.date_completed.to_date
 			if (tasks_completed_by_date[tzdate_completed].blank?)
 				tasks_completed_by_date[tzdate_completed] = 0;
 			end;
