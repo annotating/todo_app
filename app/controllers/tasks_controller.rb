@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     results = Task.where({
       user_id: current_user.id,
       created_at: (@task_date-1.days).beginning_of_day..(@task_date+1.days).end_of_day
-    })
+    }).select(:note, :created_at, :completed_at)
 
     @tasks_from_date = [];
     results.each do |t| 
