@@ -17,7 +17,7 @@ def tasks_completed(user)
 	tasks_entered = Task.where(user: user.id).select(:created_at, :completed_at)
 
 	tasks_entered.each do |t| 
-		d_created = t.created_at.to_date
+		d_created = t.created_at.in_time_zone('Pacific Time (US & Canada)').to_date
 		if (tasks_entered_by_date[d_created].blank?)
 			tasks_entered_by_date[d_created] = 0;
 		end;
@@ -26,7 +26,7 @@ def tasks_completed(user)
 
 	tasks_entered.each do |t| 
 		if (t.completed_at.present?)
-			d_completed = t.completed_at.to_date
+			d_completed = t.completed_at.in_time_zone('Pacific Time (US & Canada)').to_date
 			if (tasks_completed_by_date[d_completed].blank?)
 				tasks_completed_by_date[d_completed] = 0;
 			end;
@@ -47,8 +47,6 @@ def tasks_completed(user)
 			end
 		end
 	end
-
-	@tasks_completed[:debug_log] = tasks_entered
 
 	@tasks_completed[:date_statuses] = date_statuses;
 	@tasks_completed[:days_count] = num_days_completed.to_s + "/" + num_days_entered.to_s 
