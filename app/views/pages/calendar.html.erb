@@ -1,25 +1,31 @@
 <% provide(:title, "Calendar") %>
 
 <h1>Calendar</h1>
+<% user_tasks = tasks_completed(current_user) %>
 <p>
-	<%= tasks_completed(current_user)[:days_count] %> Days Completed
+	<%= user_tasks[:days_count] %> Days Completed
 </p>
 
-
 <section class="task_list">
-	<% date_statuses = tasks_completed(current_user)[:date_statuses] %> 
-	<% date_statuses.each do |date, status| %>
-		<% datef = date.to_s.dup
-		   datef.gsub! '-', '/'%></td>
-		<tr>
-			<td><%= datef %></td>
-			<% if (status) %>
-				<td>G</td>
-			<% else %>
-				<td>R</td>
-			<% end %>
-			<td><a><%= link_to "View", 'tasks/'+datef %></a></td>
-		</tr>
-	<% end %>
+	<table class="compact">
+		<% date_statuses = user_tasks[:date_statuses] %>
+		<% date_statuses = date_statuses.sort.reverse %>
+		<% date_statuses.each do |date, status| %>
+		<% datef = date.to_s.dup %>
+		<% datef.gsub! '-', '/'%>
+			<tr>
+				<td>
+					<% if (status) %>
+						<div class="green-dot"></div>
+					<% else %>
+						<div class="red-dot"></div>
+					<% end %>
+				</td>
+				<td><%= date.strftime("%B %e, %Y") %></td>
+				
+				<td><a><%= link_to "View", 'tasks/'+datef %></a></td>
+			</tr>	
+		<% end %>
+	</table>
 </section>
 

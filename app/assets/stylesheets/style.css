@@ -40,18 +40,40 @@ td {
 	font-size: 1.6em;
 }
 
-#task-table {
+.compact td {
+	padding:0; margin:0;
+}
+
+.numbered {
     counter-reset: rowNum;
 }
 
-#task-table tr {
+.numbered tr {
     counter-increment: rowNum;
 }
 
-#task-table tr td:first-child::before {
+.numbered tr td:first-child::before {
     content: counter(rowNum);
     min-width: 1em;
     margin-right: 5px;
 }
 
+.green-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #4caf50;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
 
+.red-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #ff5252;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}

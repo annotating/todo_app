@@ -1,7 +1,7 @@
 <% provide(:title, "Home") %>
 <% if user_signed_in? %>
 	<h1>Today's Tasks</h1>
-	<p><%= @task_items.count %> Tasks Pending Today</p>
+	<p>Tasks Pending Today</p>
 
 	<div class="taskform section amber lighten-4">
 		<%= render 'tasks/form' %>
@@ -11,7 +11,7 @@
 	
 	<div class="section amber lighten-4">
 		<% if @task_items.any? %>
-			<table id="task-table" class="hoverable">
+			<table class="numbered hoverable">
 				<tbody>
 					<%= render @task_items %>
 				</tbody>

@@ -25,11 +25,21 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task_date = DateTime.new(params[:year].to_f, params[:month].to_f, params[:day].to_f)
-    @tasks_from_date = Task.where({
+    @task_date = DateTime.new(params[:year].to_f, params[:month].to_f, params[:day].to_f).to_date
+    # didn't know how to convert local date to UTC datetime.. 
+    # workaround for now is to grab -1/+1 date range and match results to local date
+    results = Task.where({
       user_id: current_user.id,
-      created_at: @task_date.beginning_of_day..@task_date.end_of_day
+      created_at: (@task_date-1.days).beginning_of_day..(@task_date+1.days).end_of_day
     })
+
+    @tasks_from_date = [];
+    results.each do |t| 
+      if (t.created_at.to_date.to_s == @task_date.to_s)
+        @tasks_from_date.push(t)
+      end
+    end
+    @tasks_from_date
   end
 
   def destroy
