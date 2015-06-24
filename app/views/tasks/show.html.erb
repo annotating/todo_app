@@ -9,7 +9,7 @@
 		<tr>
 			<td><%= task.note %> 
 			<td>
-				<% if task.completed_at.to_date.to_s == @task_date.to_s %>
+				<% if task.completed_at.present? && (task.completed_at.to_date.to_s == @task_date.to_s) %>
 					<div class="green-text text-lighten-3"><b>&#10003</b></div>
 				<% else %>
 					<div class="red-text text-accent-3">&#10007</div>
