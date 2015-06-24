@@ -11,11 +11,17 @@
 	
 	<div class="section amber lighten-4">
 		<% if @task_items.any? %>
-			<table class="hoverable">
+			<table id="task-table" class="hoverable">
 				<tbody>
 					<%= render @task_items %>
 				</tbody>
 			</table>
 		<% end %>
+	</div>
+
+<% else %>
+	<div class="section">
+		<h1>Sign up to begin!</h1>
+		<%= render :partial => 'devise/shared/signup_form' %>
 	</div>
 <% end %>

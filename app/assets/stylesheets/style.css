@@ -20,6 +20,7 @@ p {
 
 td {
 	padding: 10px;
+	word-wrap: break-word;
 }
 
 .taskform {
@@ -38,3 +39,19 @@ td {
 .h5, .textlabel {
 	font-size: 1.6em;
 }
+
+#task-table {
+    counter-reset: rowNum;
+}
+
+#task-table tr {
+    counter-increment: rowNum;
+}
+
+#task-table tr td:first-child::before {
+    content: counter(rowNum);
+    min-width: 1em;
+    margin-right: 5px;
+}
+
+

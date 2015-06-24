@@ -3,7 +3,8 @@
     		<%= form_for(task, html: { multipart: true }) do |f| %>
 		 	<%= render 'shared/error_messages', object: f.object %>		
 			 	<tr > 
-			 	  	<td><%= task.note %></td>
+			 		<td class="number"></td>
+			 	  	<td width="66%"><%= task.note %></td>
 					<td>
 						<%= hidden_field_tag 'task[completed_at]', nil %>
 						<%= check_box_tag 'task[completed_at]', 

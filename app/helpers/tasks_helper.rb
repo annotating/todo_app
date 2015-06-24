@@ -11,13 +11,13 @@ def tasks_completed(user)
 	tasks_entered_by_date = {}
 	tasks_completed_by_date = {}
 
-	# couldn't get postgre query to work...
-	# so we will do this the ultra pleb way
+	# couldn't get postgre group query to work
+	# so will do this the pleb way of manually summing counts
 
-	tasks_entered = Task.where(user: user.id).select("DATE(created_at) as date_created, DATE(completed_at) as date_completed")
+	tasks_entered = Task.where(user: user.id).select(:created_at, :completed_at)
 
 	tasks_entered.each do |t| 
-		tzdate_created = t.date_created.to_date
+		tzdate_created = t.created_at.to_date
 		if (tasks_entered_by_date[tzdate_created].blank?)
 			tasks_entered_by_date[tzdate_created] = 0;
 		end;
@@ -25,8 +25,8 @@ def tasks_completed(user)
 	end
 
 	tasks_entered.each do |t| 
-		if (t.date_completed.present?)
-			tzdate_completed = t.date_completed.to_date
+		if (t.completed_at.present?)
+			tzdate_completed = t.completed_at.to_date
 			if (tasks_completed_by_date[tzdate_completed].blank?)
 				tasks_completed_by_date[tzdate_completed] = 0;
 			end;
